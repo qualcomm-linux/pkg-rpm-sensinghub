@@ -25,6 +25,7 @@ BuildRequires:  protobuf-compiler
 BuildRequires:  protobuf-devel
 BuildRequires:  nanopb
 BuildRequires:  nanopb-devel
+BuildRequires:  nanopb-generator
 BuildRequires:  python3-protobuf 
 
 %description
