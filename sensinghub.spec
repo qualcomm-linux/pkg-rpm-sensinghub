@@ -9,7 +9,7 @@ Summary:        Qualcomm Sensing-hub APIs Library
 License:        BSD-3-Clause
 
 URL:		    https://github.com/qualcomm/sensinghub
-Source0:		%{url}/archive/v%{version}/%{prj_name}-%{version}.tar.gz
+Source0:	    %{url}/archive/v%{version}/%{prj_name}-%{version}.tar.gz
 
 ExclusiveArch:  %{arm64}
 
@@ -52,11 +52,9 @@ Conflicts:      libsensinghub1
 %build
 autoreconf -fi
 %configure \
-	CFLAGS="%{optflags} -I%{_includedir}/nanopb" \
-	CXXFLAGS="%{optflags} -I%{_includedir}/nanopb" \
-	CPPFLAGS="-I%{_includedir}/nanopb"
-
-%make_build LDFLAGS="-lprotobuf-nanopb"
+    CFLAGS="%{optflags} -I%{_includedir}/nanopb" \
+    CXXFLAGS="%{optflags} -I%{_includedir}/nanopb" \
+    CPPFLAGS="%{optflags} -I%{_includedir}/nanopb"
 
 %install
 %make_install
@@ -74,13 +72,5 @@ find %{buildroot} -name '*.la' -delete
 %{_includedir}/*
 
 %changelog
-* Wed Nov 19 2025 Bhanu Vivek Matsa <bmasta@qti.qualcomm.com> - 1.0.2-1
-- Add operator override in suid
-
-* Mon Aug 11 2025 Bhanu Vivek Matsa <bmasta@qti.qualcomm.com> - 1.0.1-1
-- debian : Fixed the debs compilation error
-- Added not installed file for package
-- Versioned the shared libs generated
-
-* Tue Jun 17 2025 Bhanu Vivek Matsa <quic_bmasta@quicinc.com> - 1.0.0-1
-- Initial release.
+* Sun Sep 27 2026 Mritunjoy Das <mmritunj@qti.qualcomm.com> - 2.2.3-1
+- Initial RPM Build.
