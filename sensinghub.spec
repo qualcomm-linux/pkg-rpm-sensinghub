@@ -3,14 +3,11 @@
 
 Name:           qcom-sensing-hub
 Version:        2.2.3
-Release:        %autorelease
+Release:        2%{?dist}
 Summary:        Qualcomm Sensing-hub APIs Library
-
 License:        BSD-3-Clause
-
 URL:		    https://github.com/qualcomm/sensinghub
 Source0:	    %{url}/archive/v%{version}/%{prj_name}-%{version}.tar.gz
-
 ExclusiveArch:  %{arm64}
 
 BuildRequires:  autoconf
@@ -29,22 +26,18 @@ BuildRequires:  nanopb-generator
 BuildRequires:  python3-protobuf 
 
 %description
-Qualcomm Sensing-hub APIs Library.
+Qualcomm Sensing Hub (QSH) is an always-on, low-power interface designed to
+collect, process, and combine sensor and contextual data. It offers stable APIs
+that enable applications and services to interact with the hub efficiently,
+reducing the need for frequent application processor wake ups.
 
 %package devel
-Summary:        Qualcomm Sensing-hub APIs Library dev package
+Summary:        Development files for %{name}
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
-# Debian Replaces/Breaks: libsensinghub-dev
-Obsoletes:      libsensinghub-dev < %{version}-%{release}
-Conflicts:      libsensinghub-dev
-
 %description devel
-Qualcomm Sensing-hub headers & libraries
-
-# Debian Replaces/Breaks: libsensinghub1 (applies to the base package)
-Obsoletes:      libsensinghub1 < %{version}-%{release}
-Conflicts:      libsensinghub1
+The %{name}-devel package contains libraries and header files for
+applications that use %{name}.
 
 %prep
 %autosetup -n %{prj_name}-%{version}
@@ -59,9 +52,9 @@ autoreconf -fi
 %install
 %make_install
 
-find %{buildroot} -name '*.la' -delete
-
 %files
+%license LICENSE.txt
+%doc README.md
 %{_libdir}/lib*.so.*
 %{_bindir}/*
 %{_sysconfdir}/sensors/proto
@@ -72,5 +65,5 @@ find %{buildroot} -name '*.la' -delete
 %{_includedir}/*
 
 %changelog
-* Sun Sep 27 2026 Mritunjoy Das <mmritunj@qti.qualcomm.com> - 2.2.3-1
-- Initial RPM Build.
+* Sun Sep 27 2026 Mritunjoy Das <mmritunj@qti.qualcomm.com> - 2.2.3-2
+- Initial RPM Build for sensing hub, imported from fedora package
